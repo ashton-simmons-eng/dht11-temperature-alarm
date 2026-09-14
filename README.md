@@ -11,7 +11,7 @@ Reads temperature from a DHT11 sensor every 2 seconds and compares it against a 
 ## Build stages
 
 **Stage 1 — LED only**
-Basic proof of concept: read temperature from the DHT11, light an LED when it exceeds 30°C. No buzzer, no display — just confirming the sensor and threshold logic worked.
+Basic proof of concept: read temperature from the DHT11, light an LED when it exceeds 30°C. No buzzer, no display — just confirming the sensor and threshold logic worked. The reading loop was originally much faster, but the temperature values updated too quickly to actually read — the delay between readings was increased to 2 seconds to fix this.
 
 **Stage 2 — Added buzzer (continuous)**
 Added a buzzer alongside the LED so the alarm had an audible component. Both triggered together above threshold. In testing, the buzzer's continuous tone turned out to be genuinely jarring — a problem worth fixing before calling it finished, not just noise to put up with.
@@ -37,4 +37,4 @@ Two improvements made together: added a 16x2 LCD showing live temperature (with 
 
 ## What I learned / next steps
 
-Testing surfaced a usability problem (the continuous buzzer) that wasn't obvious from the code alone — only became clear once it was physically running. Fixing it by pulsing the buzzer rather than removing it kept the alert noticeable without being painful, which mattered more in practice than getting it "technically working" on the first pass. A natural next step would be making the threshold and pulse timing configurable (e.g. via serial input or a potentiometer) rather than hardcoded.
+Testing surfaced usability problems that weren't obvious from the code alone — only became clear once it was physically running. The reading rate was too fast to actually read on the display/serial monitor, so the delay was slowed to 2 seconds; the buzzer's continuous tone was jarring in practice, so it was changed to pulse instead of removed. Both fixes mattered more in practice than getting the logic "technically working" on the first pass. A natural next step would be making the threshold and pulse timing configurable (e.g. via serial input or a potentiometer) rather than hardcoded.
